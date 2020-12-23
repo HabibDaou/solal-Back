@@ -1,6 +1,8 @@
 const { User } = require('../models/user');
 const { hashedPwd } = require('../helpers/utility');
 const bcrypt = require('bcryptjs');
+const entreprise = require('../models/entreprise');
+
 module.exports = {
 
     getAll: async (req, res, next) => {
@@ -101,5 +103,42 @@ module.exports = {
 
 
 },
+addEmployeeToEntreprise: async (req, res, next) => {
+    let user = await User.findOne({ email: req.body.email });
+    if (user) return res.status(400).send('user already registred');
+    var s =[] ;
+    user = new User(req.body);
+    user.creation_dt = Date.now();
+    user.password = await hashedPwd(req.body.password);
+    user.imageUrl = req.body.imageUrl;
+    user.Role="EMPLOYEE";
+    const Entreprise = await entreprise.findById(req.params.stationId)
+    console.log(station);
+    user.entreprise.push(Entreprise);
+    await user.save();
+
+    res.status(201).json((user));
+},
+
+
+getEmployeeByEntreprise: async (req, res, next) => {
+   
+   var ListUsers=[];
+    const user = await User.find({Role:"EMPLOYEE"}).populate("entreprise");
+    user.forEach(data=>{
+            data.stationServices.forEach(res=>{
+                    if (res._id == req.params.entrepriseId){
+                            ListUsers.push(data);
+                            
+                    }
+
+            })
+    })
+
+
+
+    res.status(200).json(ListUsers);
+},
+
 
 }

@@ -20,5 +20,7 @@ router.route('/:userId')
     .delete(usersService.deleteUser)
 router.route('/sendEmail')
     .post(usersService.sendemail)
-
+router.route('/entreprise/:entrepriseId')
+    .get(usersService.getEmployeeByEntreprise)
+    .post(usersService.addEmployeeToEntreprise)
 module.exports = router;

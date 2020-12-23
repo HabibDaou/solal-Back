@@ -40,13 +40,24 @@ const userSchema = new Schema({
     },
     Role: {
         type: String,
-        enum: [ "ADMIN", "USER","EMPLOYEE"]
+        enum: [  "SOLAL","ADMIN", "USER","EMPLOYEE","ENTREPRISE"]
+    },
+    etat: {
+        type: String,
+        enum: [  "ACTIF","DESACTIVER"]
+    },
+    payement: {
+        type: Boolean
     },
     creation_dt: { type: Date, require: true }
     ,
     champs: [{
         type: Schema.Types.ObjectId,
         ref: "champ"
+    }],
+    entreprise: [{
+        type: Schema.Types.ObjectId,
+        ref: "entreprise"
     }],
 });
 

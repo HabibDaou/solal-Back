@@ -8,10 +8,9 @@ const dbConfig = require('./config/config');
 const mongoose = require('mongoose');
 const userRouter = require('./controllers/user.controller');
 const authRouter = require('./controllers/auth.controller');
-const bassinRouter = require('./controllers/bassin.controller');
-const moteurRouter = require('./controllers/moteur.controller');
 const champRouter = require('./controllers/champ.controller');
-const sondageRouter = require('./controllers/sondage.controller');
+const entrepriseRouter = require('./controllers/entreprise.controller');
+
 const uploads = require('./controllers/uploads.controller');
 
 var cors = require('cors');
@@ -43,9 +42,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
 app.use('/champ', champRouter);
-app.use('/bassin', bassinRouter);
-app.use('/moteur', moteurRouter);
-app.use('/sondage', sondageRouter);
+app.use('/entreprise', entrepriseRouter);
+
 app.use('/uploads', uploads);
 
 //Cors
