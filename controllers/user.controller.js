@@ -8,7 +8,6 @@ router.get('/me',auth, async (req, res) => {
     const user = await User.findById(req.user._id).select('-password');
     res.send(user);
 })
-
 router.route('/')
     .get(usersService.getAll)
     .post(usersService.newUser)
@@ -20,6 +19,8 @@ router.route('/:userId')
     .delete(usersService.deleteUser)
 router.route('/sendEmail')
     .post(usersService.sendemail)
+router.route('/convert')
+    .post(usersService.ConvertImage)
 router.route('/entreprise/:entrepriseId')
     .get(usersService.getEmployeeByEntreprise)
     .post(usersService.addEmployeeToEntreprise)

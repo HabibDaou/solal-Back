@@ -10,6 +10,7 @@ const userRouter = require('./controllers/user.controller');
 const authRouter = require('./controllers/auth.controller');
 const champRouter = require('./controllers/champ.controller');
 const entrepriseRouter = require('./controllers/entreprise.controller');
+const offreRouter = require('./controllers/offre.controller');
 
 const uploads = require('./controllers/uploads.controller');
 
@@ -43,6 +44,7 @@ app.use('/users', userRouter);
 app.use('/auth', authRouter);
 app.use('/champ', champRouter);
 app.use('/entreprise', entrepriseRouter);
+app.use('/offre', offreRouter);
 
 app.use('/uploads', uploads);
 

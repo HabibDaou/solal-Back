@@ -1,4 +1,5 @@
 const { Entreprise } = require('../models/entreprise');
+const  {User}  = require('../models/user');
 
 module.exports = {
 
@@ -42,5 +43,18 @@ module.exports = {
         const Entreprises = await Entreprise.deleteMany();
         res.status(200).json('success');
     },
+       
+    AddEntrepriseToUser: async (req, res, next) => {
+        const user = await User.findById(req.body.id);
+        const sts = new Entreprise(req.body.entreprise);
+        sts.save();
+        user.entreprise.push(sts);
+        user.save();
+        res.status(200).json(user);
+},
+getallEntrepriseByUser: async (req, res, next) => {
+    const user = await User.findById(req.params.userId).populate("entreprise")
+    res.status(200).json(user);
+},
 
 }

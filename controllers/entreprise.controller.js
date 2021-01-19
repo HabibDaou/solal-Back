@@ -12,5 +12,10 @@ router.route('/:EntrepriseId')
     .get(EntrepriseService.getEntreprise)
     .put(EntrepriseService.updateEntreprise)
     .delete(EntrepriseService.deleteEntreprise)
-    
-module.exports = router;
+
+router.route('/entreprise')
+    .post(EntrepriseService.AddEntrepriseToUser)
+
+router.route('/getEntreprise/:userId')
+    .get(EntrepriseService.getallEntrepriseByUser)
+    module.exports = router;
